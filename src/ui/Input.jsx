@@ -1,14 +1,17 @@
-import React from 'react'
-
-const Input = ({label , type ='text' , state , setState}) => {
-  return (
-    <div>
-       <div className="form-floating">
-            <input type={type} className="form-control" id="floatingInput" placeholder={label} />
-            <label htmlFor="floatingInput">{label}</label>
-          </div>
-    </div>
-  )
+const Input = ({label, state, setState, type = 'text'}) => {
+	return (
+		<div className='form-floating'>
+			<input
+				type={type}
+				className='form-control'
+				value={state}
+				onChange={e => setState(e.target.value)}
+				id='floatingInput'
+				placeholder={label}
+			/>
+			<label htmlFor='floatingInput'>{label}</label>
+		</div>
+	)
 }
 
 export default Input

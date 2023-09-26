@@ -1,34 +1,57 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useEffect, useState} from 'react'
 import Icon from "../assets/images/Logo2.jpg"
-import Input from "../ui/Input";
+import {Input} from '../ui'
+import {useSelector, useDispatch} from 'react-redux'
+import {signUserFailure, signUserStart, signUserSuccess} from '../slice/auth'
+import AuthService from '../service/auth'
+import ValidationError from './validation-error'
+import { useNavigate } from 'react-router-dom'
+
 
 const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  const [email, setEmail] = useState('')
-  const [password , setPassword] =useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const dispatch = useDispatch()
+	const {isLoading , loggedIn} = useSelector(state => state.auth)
+  const navigate = useNavigate()
 
-  return (
-    <div className=' flex justify-center text-center'>
-      <main className="form-signin w-96">
-        <form onSubmit={handleSubmit}>
-          <img className="mb-4 ml-36 my-12" src={Icon} alt="" width="92" height="67" />
-          <h1 className="h3 mb-3 fw-normal">Please Login </h1>
-           
-           <Input label={'Email address '} type={'email'} state={email} setState={setEmail} />
-           <Input label={'Password'} type={'password'} state={password} setState={setPassword} /> 
+	const loginHandler = async e => {
+		e.preventDefault()
+		dispatch(signUserStart())
+		const user = {email, password}
+		try {
+			const response = await AuthService.userLogin(user)
+			dispatch(signUserSuccess(response.user))
+      navigate('/')
+		} catch (error) {
+			dispatch(signUserFailure(error.response.data.errors))
+		}
+	}
+  useEffect(() => {
+    if(loggedIn){
+      navigate('/')
+    }
+  } , [])
 
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
-          </div>
-          <button className="w-100 btn btn-lg btn-primary bg-blue-600" type="submit"> Login</button>
-        </form>
-      </main>
-    </div>
-  );
+	return (
+		<div className='text-center mt-5'>
+			<main className='form-signin w-25 m-auto'>
+				<form>
+					<img className='mb-2' src={Icon} alt='' width='72' height='60' />
+					<h1 className='h3 mb-3 fw-normal'>Please login</h1>
+					<ValidationError />
+
+					<Input label={'Email address'} state={email} setState={setEmail} />
+					<Input label={'Password'} type={'password'} state={password} setState={setPassword} />
+
+					<button className='w-100 btn btn-lg bg-blue-600 btn-primary mt-2' disabled={isLoading} onClick={loginHandler} type='submit'>
+						{isLoading ? 'loading...' : 'Login'}
+					</button>
+				</form>
+			</main>
+		</div>
+	)
 }
 
-export default Login;
+export default Login
