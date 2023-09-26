@@ -5,5 +5,19 @@ const setItem = (key, data) => {
 		console.log('Error savong data')
 	}
 }
+ const getItem = (key) => {
+	try {
+		return localStorage.getItem(key)
+	} catch (error) {
+		console.log('Error getting data')
+	}
+}
+const removeItem =(key) => {
+	try {
+		localStorage.removeItem(key)
+	} catch (error) {
+		console.log('error removing data');
+	}
+}
 
-export default setItem
+export  {setItem , getItem , removeItem}
