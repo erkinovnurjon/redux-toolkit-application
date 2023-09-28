@@ -6,8 +6,6 @@ import {Main, Login, Register, Navbar, Articledetail, CreateArticle} from './com
 
 import AuthService from './service/auth'
 import {signUserSuccess} from './slice/auth'
-import ArticleService from './service/article'
-import {getArticlesStart, getArticleSuccess} from './slice/article'
 import { getItem } from './helpers/storage'
 
 const App = () => {
@@ -22,22 +20,14 @@ const App = () => {
 		}
 	}
 
-	const getArticles = async () => {
-		dispatch(getArticlesStart())
-		try {
-			const response = await ArticleService.getArticles()
-			dispatch(getArticleSuccess(response.articles))
-		} catch (error) {
-			console.log(error)
-		}
-	}
+	
 
 	useEffect(() => {
 		const token = getItem('token')
 		if (token) {
 			getUser()
 		}
-		getArticles()
+		
 	}, [])
 
 	return (
