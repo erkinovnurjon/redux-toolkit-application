@@ -27,6 +27,10 @@ const Navbar = () => {
         <nav className="d-flex gap-9 items-center">
           {loggedIn ? (
             <>
+               <Link to={'/create-article'}>
+                create article
+
+               </Link>
               <p className=' text-xl font-medium '>{user.username}</p>
               <div className="btn btn-danger" onClick={logOuthandler}>Log Out</div>
             </>

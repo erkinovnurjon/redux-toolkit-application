@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect, useState} from 'react'
 import Icon from "../assets/images/Logo2.jpg"
-import {Input} from '../ui'
+import {Input, Loaderbutton} from '../ui'
 import {useSelector, useDispatch} from 'react-redux'
 import {signUserFailure, signUserStart, signUserSuccess} from '../slice/auth'
 import AuthService from '../service/auth'
@@ -47,7 +47,7 @@ const Register = () => {
 					<Input label={'Password'} type={'password'} state={password} setState={setPassword} />
 
 					<button className='w-100 btn btn-lg  bg-blue-600 btn-primary mt-2' disabled={isLoading} onClick={registerHandler} type='submit'>
-						{isLoading ? 'loading...' : 'Register'}
+						{isLoading ? <Loaderbutton /> : 'Register'}
 					</button>
 				</form>
 			</main>

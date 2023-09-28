@@ -1,3 +1,6 @@
 export {default as Main} from "./Main"
 export {default as Login} from "./Login"
 export {default as Register} from "./Register"
+export {default as Navbar} from "./Navbar"
+export {default as Articledetail} from "./article-detail"
+export {default as CreateArticle} from "./CreateAericle"
