@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../ui';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import ArticleService from '../service/article';
 
 const Main = () => {
 	const { articles , isLoading } = useSelector(state => state.article);
+	const { loggedIn , user } = useSelector(state => state.auth);
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -19,6 +21,15 @@ const Main = () => {
 			dispatch(getArticleSuccess(response.articles))
 		} catch (error) {
 			console.log(error)
+		}
+	}
+
+	const deleteHandler = async (slug) =>{
+		try {
+			await ArticleService.deletearticle(slug)
+			getArticles()
+		} catch (error) {
+			console.log(error);
 		}
 	}
 	useEffect(() => {
@@ -60,12 +71,20 @@ const Main = () => {
                                                                          type='button' className='btn btn-sm btn-outline-success'>
 													View
 												</button>
-												<button type='button' className='btn btn-sm btn-outline-secondary'>
+												{
+													loggedIn && user.username === item.author.username &&(
+														<>
+														
+														<button type='button' className='btn btn-sm btn-outline-secondary'>
 													Edit
 												</button>
-												<button type='button' className='btn btn-sm btn-outline-danger'>
+												<button 
+												onClick={() => deleteHandler(item.slug)} type='button' className='btn btn-sm btn-outline-danger'>
 													Delete
 												</button>
+												</>
+													)
+												}
 											</div>
 											<small className='text-muted fw-bold text-capitalize'>{item.author.username}</small>
 										</div>
