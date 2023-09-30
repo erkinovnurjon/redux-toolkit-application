@@ -5,7 +5,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getDetailFailure, getDetailStart, getDetailSuccess } from "../slice/article"
 import moment from "moment/moment"
-import { Loader } from "../ui"
+
+import Loaderr from "../ui/Loaderr"
 const Articledetail = () => {
       const {slug} = useParams()
       const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const Articledetail = () => {
             getArticleDetail()
       } , [slug])
   return isLoading ? (
-		<Loader />
+		<Loaderr />
 	) : (
 		articleDetail !== null && (
 			<div>

@@ -7,6 +7,7 @@ import {Main, Login, Register, Navbar, Articledetail, CreateArticle} from './com
 import AuthService from './service/auth'
 import {signUserSuccess} from './slice/auth'
 import { getItem } from './helpers/storage'
+import EditArticle from './components/EditArticle'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -39,6 +40,7 @@ const App = () => {
 				<Route path='/register' element={<Register />} />
 				<Route path='/article/:slug' element={<Articledetail />} />
 				<Route path='/create-article' element={<CreateArticle /> } />
+				<Route path='/edit-article/:slug' element={<EditArticle /> } />
 			</Routes>
 		</div></>
 	)

@@ -37,6 +37,7 @@ const Register = () => {
 	return (
 		<div className='text-center mt-5'>
 			<main className='form-signin w-25 m-auto'>
+				{isLoading && <Loaderbutton />}
 				<form>
 					<img className='mb-2' src={Icon} alt='' width='72' height='60' />
 					<h1 className='h3 mb-3 fw-normal'>Please register</h1>

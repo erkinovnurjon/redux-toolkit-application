@@ -1,4 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
 import axios from './api'
 
 const ArticleService = {
@@ -11,14 +10,17 @@ const ArticleService = {
 		return data
 	},
 	async postArticle(article) {
-		const {data} = await axios.post('/articles' , {article})
+		const {data} = await axios.post('/articles', {article})
 		return data
 	},
-	async deletearticle(slug) {
-		const { data } = await axios.delete(`/articles/${slug}`);
+	async deleteArticle(slug) {
+		const {data} = await axios.delete(`/articles/${slug}`)
 		return data
-	}
+	},
+	async editArticle(slug, article) {
+		const {data} = await axios.put(`/articles/${slug}`, {article})
+		return data
+	},
 }
-
 
 export default ArticleService
