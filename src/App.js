@@ -8,6 +8,8 @@ import AuthService from './service/auth'
 import {signUserSuccess} from './slice/auth'
 import { getItem } from './helpers/storage'
 import EditArticle from './components/EditArticle'
+import "./ui/Response.css"
+import NotFound from './components/NotFound'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -32,7 +34,8 @@ const App = () => {
 	}, [])
 
 	return (
-		<><Navbar />
+		<>
+		<Navbar />
 		<div className='container mx-auto px-8'>
 			<Routes>
 				<Route path='/' element={<Main />} />
@@ -41,6 +44,7 @@ const App = () => {
 				<Route path='/article/:slug' element={<Articledetail />} />
 				<Route path='/create-article' element={<CreateArticle /> } />
 				<Route path='/edit-article/:slug' element={<EditArticle /> } />
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</div></>
 	)

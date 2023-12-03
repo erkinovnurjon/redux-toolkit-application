@@ -39,8 +39,10 @@ const Register = () => {
 			<main className='form-signin w-25 m-auto'>
 				{isLoading && <Loaderbutton />}
 				<form>
-					<img className='mb-2' src={Icon} alt='' width='72' height='60' />
-					<h1 className='h3 mb-3 fw-normal'>Please register</h1>
+					<div className=' flex justify-center  items-center'>
+						<img className='mb-2   text-center' src={Icon} alt='d' width='72' height='60' />
+					<h1 className='h3 mb-3 fw-normal md:h4'>Please register</h1>
+					</div>
 				  <ValidationError />
 
 					<Input label={'Username'} state={name} setState={setName} />

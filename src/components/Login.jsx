@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect, useState} from 'react'
 import Icon from "../assets/images/Logo2.jpg"
-import {Input, Loader, Loaderbutton} from '../ui'
+import {Input, Loaderbutton} from '../ui'
 import {useSelector, useDispatch} from 'react-redux'
 import {signUserFailure, signUserStart, signUserSuccess} from '../slice/auth'
 import AuthService from '../service/auth'
